@@ -18,8 +18,8 @@
                   .domain([700, 1200])
 
         lineChart
-              .width(800)
-              .height(400)
+              .width(auto)
+              .height(auto)
               .dimension(yearDim)
               .margins({top: 50, right: 50, bottom: 25, left: 40})
               .renderArea(false)
