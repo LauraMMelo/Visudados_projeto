@@ -7,8 +7,13 @@
         yearDim = facts.dimension(d => d.ANO)
         obitoAno = yearDim.group().reduceSum(d => d.OBITO)
         nascAno = yearDim.group().reduceCount(d => d.OBITO)
+        taxaAno = yearDim.group().reduceSum(d => d.OBITO)
 
-        console.log(yearDim.group())
+        for (i = 0; i < taxaAno.size(); i++) {
+            taxaAno.all()[i].value = (taxaAno.all()[i].value/nascAno.all()[i].value)*1000
+          }
+
+        console.log(taxaAno.all())
 
         let lineChart = dc.lineChart(".line-chart-obitos")
         let xScale = d3.scaleTime()
@@ -32,24 +37,24 @@
         lineChart.render()
 
 
-      //   pesoDim = facts.dimension(d => d.PESO)           
+        idadeDim = facts.dimension(d => d.IDADEMAE)           
 
-      //   obitoPeso = pesoDim.group().reduceSum(d => d.OBITO)
+        obitoIdade = idadeDim.group().reduceSum(d => d.OBITO)
 
 
-      //   let barChart = dc.barChart(".bar-chart-idademae")
+        let barChart = dc.barChart(".bar-chart-idademae")
         
-      //   barChart
-      //       .width(800)
-      //       .height(400)
-      //       .margins({top: 50, right: 50, bottom: 25, left: 40})
-      //       .dimension(pesoDim)
-      //       .x(d3.scaleBand())
-      //       .xUnits(dc.units.ordinal)
-      //       .brushOn(true)
-      //       .group(obitoPeso)
+        barChart
+            .width(800)
+            .height(400)
+            .margins({top: 50, right: 50, bottom: 25, left: 40})
+            .dimension(idadeDim)
+            .x(d3.scaleBand())
+            .xUnits(dc.units.ordinal)
+            .brushOn(true)
+            .group(obitoIdade)
           
-      //     barChart.render()
+          barChart.render()
 
 
 });
