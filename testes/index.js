@@ -32,24 +32,24 @@
         lineChart.render()
 
 
-        // pesoDim = facts.dimension(d => d.PESO)           
+      //   pesoDim = facts.dimension(d => d.PESO)           
 
-        // obitoPeso = pesoDim.group().reduceSum(d => d.OBITO)
+      //   obitoPeso = pesoDim.group().reduceSum(d => d.OBITO)
 
 
-        // let barChart = dc.barChart(".bar-chart-idademae")
+      //   let barChart = dc.barChart(".bar-chart-idademae")
         
-        // barChart
-        //     .width(800)
-        //     .height(400)
-        //     .margins({top: 50, right: 50, bottom: 25, left: 40})
-        //     .dimension(pesoDim)
-        //     .x(d3.scaleBand())
-        //     .xUnits(dc.units.ordinal)
-        //     .brushOn(true)
-        //     .group(obitoPeso)
+      //   barChart
+      //       .width(800)
+      //       .height(400)
+      //       .margins({top: 50, right: 50, bottom: 25, left: 40})
+      //       .dimension(pesoDim)
+      //       .x(d3.scaleBand())
+      //       .xUnits(dc.units.ordinal)
+      //       .brushOn(true)
+      //       .group(obitoPeso)
           
-        //   barChart.render()
+      //     barChart.render()
 
 
 });
