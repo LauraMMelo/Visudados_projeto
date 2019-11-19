@@ -1,4 +1,4 @@
-d3.csv('./mortalidade_datavis_sem2013.csv', function(dataset) {
+d3.csv('mortalidade_datavis_sem2013.csv', function(dataset) {
     //console.log(dataset)
 
     facts = crossfilter(dataset)
