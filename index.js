@@ -1,4 +1,3 @@
-
  d3.csv('../mortalidade_datavis_sem2013.csv', function(dataset) {
         //console.log(dataset)
 
@@ -19,9 +18,11 @@
         let xScale = d3.scaleTime()
                   .domain([yearDim.bottom(1)[0].ANO, yearDim.top(1)[0].ANO])
 
-        // let yScale = d3.scaleLinear()
-        //           .domain([700, 1200])
-
+        let yScaleSmall = d3.scaleLinear()
+                  .domain([0, 10])
+        let yScale = d3.scaleLinear()
+                             .domain([0,1200])
+        
         lineChart
               .width(800)
               .height(400)
@@ -33,8 +34,28 @@
               .renderHorizontalGridLines(true)
               .brushOn(false)
               .group(obitoAno)
+              
+              
 
         lineChart.render()
+
+        d3.selectAll('#myCheckbox')
+        .on('change', function() {
+          console.log("selected")
+          if (document.getElementById("myCheckbox").checked === true) {
+            console.log("found")
+            lineChart
+              .y(yScaleSmall)
+              .group(taxaAno)
+              .render()
+          }
+          else {
+            lineChart
+              .y(yScale)
+              .group(obitoAno)
+              .render()
+          }
+        })
 
         idadeDim = facts.dimension(d => d.IDADEMAE)           
 
@@ -57,4 +78,8 @@
 
 });
 
+
+function newFunction() {
+  toggleCheck();
+}
 
