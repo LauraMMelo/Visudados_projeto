@@ -19,8 +19,8 @@
         let xScale = d3.scaleTime()
                   .domain([yearDim.bottom(1)[0].ANO, yearDim.top(1)[0].ANO])
 
-        let yScale = d3.scaleLinear()
-                  .domain([700, 1200])
+        // let yScale = d3.scaleLinear()
+        //           .domain([700, 1200])
 
         lineChart
               .width(800)
@@ -29,18 +29,16 @@
               .margins({top: 50, right: 50, bottom: 25, left: 40})
               .renderArea(false)
               .x(xScale)
-              .y(yScale)
+              // .y(yScale)
               .renderHorizontalGridLines(true)
               .brushOn(false)
               .group(obitoAno)
 
         lineChart.render()
 
-
         idadeDim = facts.dimension(d => d.IDADEMAE)           
 
         obitoIdade = idadeDim.group().reduceSum(d => d.OBITO)
-
 
         let barChart = dc.barChart(".bar-chart-idademae")
         
