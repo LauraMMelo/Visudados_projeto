@@ -71,22 +71,6 @@ a:hover {
     color: #125699;
 }
 
-
-
-footer {
-    color: rgb(202, 202, 202);
-    font-family: Roboto;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-}
-
-footer a {  
-    display: flex;
-    align-items: center;
-}
-
 /* The switch - the box around the slider */
 .switch {
     position: relative;
@@ -136,9 +120,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-    -webkit-transform: translateX(23px);
-    -ms-transform: translateX(23px);
-    transform: translateX(23px);
+    -webkit-transform: translateX(22px);
+    -ms-transform: translateX(22px);
+    transform: translateX(22px);
 }
 
 /* Rounded sliders */
@@ -148,6 +132,20 @@ input:checked + .slider:before {
 
 .slider.round:before {
     border-radius: 50%;
+}
+
+footer {
+    color: rgb(202, 202, 202);
+    font-family: Roboto;
+    margin-top: 8px;
+    display: flex;
+    align-items: center;
+    line-height: 20px;
+}
+
+footer a {  
+    display: flex;
+    align-items: center;
 }
 
 /* Responsive Styles */
