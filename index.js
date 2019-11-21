@@ -75,6 +75,29 @@
           
           barChart.render()
 
+        
+        racaDim = facts.dimension(d => d.RACACOR)
+
+        obitoRaca = racaDim.group().reduceSum(d => d.OBITO)
+
+        let piechart = dc.pieChart(".pie-chart-raça")
+
+        piechart
+            .width(768)
+            .height(480)
+            .slicesCap(4)
+            .innerRadius(100)
+            .dimension(racaDim)
+            .group(obitoRaca)
+            // .legend(dc.legend())
+            // // workaround for #703: not enough data is accessible through .label() to display percentages
+            // .on('pretransition', function(chart) {
+            //     chart.selectAll('text.pie-slice').text(function(d) {
+            //         return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
+            //     })
+            // });
+          piechart.render();
+
 
 });
 
