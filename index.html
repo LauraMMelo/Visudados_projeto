@@ -54,36 +54,36 @@
                     </label>
                 </div>
             <br>
-            <p align="center">Ative o botão para ver as taxas no lugar dos valores absolutos</p><br>
+            <p align="center">Ative o botão para ver Taxa de Mortalidade no lugar dos valores absolutos</p><br>
+            <p align="center">A taxa de mortalidade infantil representa o número de óbitos por mil nascidos vivos em um certo grupo</p><br>
             <div id="charts">
                 <h2 align="center">Óbitos infantis por ano</h2>
                 <div id="chart" class="line-chart-obitos"></div>
                 <div>
-                    <p align="justify" style="width: 800"> Esta visualização representa a quantidade de
-                        óbitos nos anos analisados (2014, 2015, 2016 e 2017). No eixo X temos a marcação
-                        temporal e no eixo Y temos o valor para cada data. Ao clicarmos no botão no início
-                        da página, temos, no eixo Y, o valor da Taxa de Mortalidade para o ano em questão.
-                        (NECESSITA MELHOR ELABORAÇÃO)
+                    <p align="justify" style="width: 800"> Óbitos infantis por ano
                     </p>
                 </div>
                 <br>
                 <h2 align="center">Mortalidade x Idade da Mãe</h2>
                 <div id="chart" class="bar-chart-idademae"></div>
                 <div>
-                    <p align="justify" style="width: 800"> Esta visualização representa a quantidade 
-                        de óbitos em relação à idade da mãe. No eixo X temos as idades e no eixo Y a
-                        quantidade. Ao clicarmos no botão no início da página temos os valores relativos
-                        representando a Taxa de Mortalidade dos filhos de uma mãe com a idade indicada.
-                        (NECESSITA MELHOR ELABORAÇÃO)
+                    <p align="justify" style="width: 800"> Óbitos por idade da Mãe
                     </p>
                 </div>
                 <br>
-                <h2 align="center">Raça (ETNIA???)</h2><br>
-                <div id="pie-chart" class="pie-chart-raça"></div><br>
                 <div>
-                    <p align="justify" style="width: 800">Esta visualização nos mostra a divisão de Óbitos
-                        de acordo com a Raça da criança. (NECESSITA MELHOR ELABORAÇÃO)
-                    </p>
+                    <div style="float: left">
+                        <h3>Raça - cor</h3><br> 
+                        <div id="pie-chart" class="pie-chart-raça"></div><br>
+                    </div>
+                    <div style="float: left">
+                        <h3>Escolaridade da mãe</h3><br> 
+                        <div id="pie-chart" class="pie-chart-escmae"></div><br>
+                    </div>
+                    <div style="float: left">
+                        <h3>Tempo de gestação</h3><br> 
+                        <div id="pie-chart" class="pie-chart-gestacao"></div><br>
+                    </div>
                 </div>
             </div>
                 
@@ -106,7 +106,7 @@
                 </ul>
                 <h4>Fonte</h4>
                 <ul class="list-unstyled quick-links">
-                    <li><a href="https://www.saude.ce.gov.br/">Dados obtidos da Secretaria de Saúde do Ceará</a></li>
+                    <li><a href="http://www2.datasus.gov.br/DATASUS/index.php?area=0901">Dados obtidos do DATASUS</a></li>
                 </ul>
             </div>
         </footer>
