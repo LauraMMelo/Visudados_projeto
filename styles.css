@@ -56,7 +56,13 @@ body {
     align-items: center;
 }
 
+#pie-chart {
+    font-family: Roboto;
+    background-color: transparent;
+}
+
 #chart {
+    font-family: Roboto;
     background-color: white;
 }
 
