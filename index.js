@@ -2,8 +2,10 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   //console.log(dataset)
 
   facts = crossfilter(dataset)
-
+  
+  // #################################################
   // Gráfico que mostra a quantidade de óbitos por ano
+  // #################################################
   yearDim = facts.dimension(d => d.ANO)
   obitoAno = yearDim.group().reduceSum(d => d.OBITO)
   nascAno = yearDim.group().reduceCount(d => d.OBITO)
@@ -12,7 +14,6 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   for (i = 0; i < taxaAno.size(); i++) {
     taxaAno.all()[i].value = (taxaAno.all()[i].value / nascAno.all()[i].value) * 1000
   }
-
 
   console.log(taxaAno.all())
 
@@ -32,14 +33,15 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
     .margins({ top: 50, right: 50, bottom: 25, left: 40 })
     .renderArea(false)
     .x(xScale)
-    // .y(yScale)
     .renderHorizontalGridLines(true)
     .brushOn(false)
     .group(obitoAno)
 
   lineChart.render()
 
+  // #############################################
   // Gráfico que relaciona Idade da Mãe com Óbitos
+  // #############################################
   idadeDim = facts.dimension(d => d.IDADEMAE)
   nascAno2 = idadeDim.group().reduceCount(d => d.OBITO)
   obitoIdade = idadeDim.group().reduceSum(d => d.OBITO)
@@ -70,7 +72,6 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   d3.selectAll('#myCheckbox')
     .on('change', function () {
       if (document.getElementById("myCheckbox").checked === true) {
-        console.log("found")
         lineChart
           .y(yScaleSmall)
           .group(taxaAno)
@@ -94,7 +95,9 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
     })
 
 
+  // ###################################################
   // Gráfico que relaciona a Raça à Quantidade de Óbitos
+  // ###################################################
   racaDim = facts.dimension(d => d.RACACOR)
 
   obitoRaca = racaDim.group().reduceSum(d => d.OBITO)
