@@ -1,5 +1,12 @@
 d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   //console.log(dataset)
+
+  function camelCase(str) { 
+    return str.replace(/(?:^\w|[A-Z]|\b\w)/g, function(word, index) 
+    { 
+        return index == 0 ? word.toLowerCase() : word.toUpperCase(); 
+    }).replace(/\s+/g, ''); 
+} 
   
 
   facts = crossfilter(dataset)
@@ -20,7 +27,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let xScale = d3.scaleLinear()
     .domain([yearDim.bottom(1)[0].ANO, yearDim.top(1)[0].ANO])
 
-  console.log(xScale)
+  // console.log(xScale)
   let yScaleSmall = d3.scaleLinear()
     .domain([0, 10])
   let yScale = d3.scaleLinear()
@@ -161,6 +168,10 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   // Mapa do Ceará
   // #############
 
+  munDim = facts.dimension(d => d.Município)
+
+  obitoMun = munDim.group().reduceSum(d => d.OBITO)
+
   var width = 960,
       height = 600;
 
@@ -168,9 +179,27 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
       .attr("width", width)
       .attr("height", height);
 
+  let obitoMap = d3.map()
+  for (i = 0; i < obitoMun.size(); i++) {
+    obitoMap.set(obitoMun.all()[i].key.normalize("NFD").replace(/[\u0300-\u036f]/g, ""), obitoMun.all()[i].value)
+  }
+
+  let taxaMap = d3.map()
+  dataset.forEach(function(d) {
+        d.Município = d.Município.normalize("NFD").replace(/[\u0300-\u036f]/g, "")
+        taxaMap.set(d.Município, d.TAXA_MORT)
+      });
+
+  colorScale = d3.scaleQuantize()
+      .domain([1,10])
+      .range(['white', 'beige', 'Khaki', 'yellow', 'orange', 'tomato', 'OrangeRed', 'red'])
+
+  console.log(obitoMap)
+
+  
   d3.json("ceara.json", function(error, ceara) {
           if (error) return console.error(error);
-          console.log(ceara);
+          // console.log(ceara);
           
           var subunits = topojson.feature(ceara, ceara.objects.Municipios_do_Ceara);
           var projection = d3.geoMercator()
@@ -183,17 +212,102 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
 
           svg.append("path")
           .datum(subunits)
-          .attr("d", path);
+          .attr("d", path);          
 
           svg.selectAll(".subunit")
-                  .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
-                  .enter().append("path")
-                  .attr("class", function(d) { 
-                          // console.log(d)
-                          return "subunit " + d.properties.Name.toUpperCase();
+                          .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
+                          .enter().append("path")
+                          .attr("id", function(d) { 
+                                  // console.log(d)
+                                  return d.properties.Name.toUpperCase();
+                          })
+                          .attr("fill", d => colorScale(obitoMap.get(d.properties.Name.toUpperCase())))
+                          .attr("d", path)                          
+                          .on("mouseover", function(d){
+                              d3.select(this).style("cursor", "pointer")
+                                  .attr("stroke-width", 3)
+                                  .attr("stroke", "#FFF5B1")
+                                  .append("title").text(d => d.properties.Name + ": " + obitoMap.get(d.properties.Name.toUpperCase()))
+                        
+                              
+                              })
+                              .on("mouseout", function(d){
+                                    d3.select(this)
+                                      .style("cursor", "default")
+                                      .attr("stroke-width", 0)
+                                      .attr("stroke", "none");
+                                  })
+          
+          d3.selectAll('#myCheckbox')
+                  .on('change', function () {
+                    if (document.getElementById("myCheckbox").checked === true) {
+                      svg.selectAll(".subunit")
+                          .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
+                          .enter().append("path")
+                          .attr("id", function(d) { 
+                                  // console.log(d)
+                                  return d.properties.Name.toUpperCase();
+                          })
+                          .attr("fill", d => colorScale(taxaMap.get(d.properties.Name.toUpperCase())))
+                          .attr("d", path)
+                          .on("mouseover", function(d){
+                            d3.select(this).style("cursor", "pointer")
+                                .attr("stroke-width", 3)
+                                .attr("stroke", "#FFF5B1")
+                                .append("title").text(d => d.properties.Name + ": " + obitoMap.get(d.properties.Name.toUpperCase()))
+                      
+                            
+                            })
+                            .on("mouseout", function(d){
+                                  d3.select(this)
+                                    .style("cursor", "default")
+                                    .attr("stroke-width", 0)
+                                    .attr("stroke", "none");
+                                })
+                            }
+                    else {
+                      svg.selectAll(".subunit")
+                          .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
+                          .enter().append("path")
+                          .attr("id", function(d) { 
+                                  // console.log(d)
+                                  return d.properties.Name.toUpperCase();
+                          })
+                          .attr("fill", d => colorScale(obitoMap.get(d.properties.Name.toUpperCase())))
+                          .attr("d", path)
+                          .on("mouseover", function(d){
+                            d3.select(this).style("cursor", "pointer")
+                                .attr("stroke-width", 3)
+                                .attr("stroke", "#FFF5B1")
+                                .append("title").text(d => d.properties.Name + ": " + obitoMap.get(d.properties.Name.toUpperCase()))
+                      
+                            
+                            })
+                            .on("mouseout", function(d){
+                                  d3.select(this)
+                                    .style("cursor", "default")
+                                    .attr("stroke-width", 0)
+                                    .attr("stroke", "none");
+                                })
+                    }
                   })
-                  .attr("d", path);
+
   });
 
+  
 
+  // let taxaMap = d3.map()
+  //             dataset.forEach(function(d) {
+  //               taxaMap.set(d.Município.normalize("NFD").replace(/[\u0300-\u036f]/g, ""), d.TAXA_MORT)
+  //             });
+  
+  // d3.selectAll(".subunit")
+
+    
+  // dataset.forEach(function (d) {
+  //   d3.select("#${d.Município}")
+  //       .attr("fill", d => colorScale(taxaMap.get(d.d.Município.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))))
+  // })            
+
+    // d => colorScale(taxaMap.get(d.Município)
 });
