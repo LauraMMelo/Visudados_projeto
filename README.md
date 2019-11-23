@@ -2,9 +2,6 @@
 
 ## Este repositório contém código para geração de visualizações interativas sobre a __Mortalidade Infantil no Ceará__
 
-<!-- INSERIR LINK DO GITHUB PAGES -->
-### Acesse [Mortalidade Infantil no Ceará](https://pages.github.com) para ver a versão live do site
-
 ### Para rodar uma versão local:
 1. Primeiro clone o repositório usando `git clone` 
 2. No terminal, navegue à página raiz do projeto
