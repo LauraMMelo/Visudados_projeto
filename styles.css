@@ -141,46 +141,85 @@ input:checked + .slider:before {
     border-radius: 50%;
 }
 
-footer {
+.column {
+    float: left;
+    width: 33.33%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+
+
+
+hr {
     color: rgb(202, 202, 202);
-    font-family: Roboto;
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
+
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible
 }
 
-footer a {  
-    display: flex;
-    align-items: center;
+.footer-main {
+    border-top: 1px solid #ededed;
+    padding: 40px 0;
+    margin: 40px 0 0;
+    font-size: 1.3rem;
+    color: rgb(202, 202, 202);
+    font-weight: 300;
+    text-align: center;
+    position: relative
 }
 
-/* Responsive Styles */
-@media screen and (max-width: 767px) {
-
-.card-container > *:not(.circle-link) ,
-.terminal {
-    width: 100%;
+.footer-main:before {
+    display: block;
+    content: " ";
+    width: 5px;
+    height: 5px;
+    border: rgb(202, 202, 202) 1px solid;
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    margin-left: -5px;
+    background:rgb(202, 202, 202);
+    box-shadow: rgb(202, 202, 202) 0 0 0 5px;
+    border-radius: 3px
 }
 
-.card:not(.highlight-card) {
-    height: 16px;
-    margin: 8px 0;
+.footer-main>.link {
+    display: inline
 }
 
-.card.highlight-card span {
-    margin-left: 72px;
+.footer-main>.link>.icon {
+    width: 15px !important;
+    fill: #aaa !important;
+    transition: ease-in-out all .3s;
+    position: relative;
+    top: 3px;
+    display: inherit;
+    margin: 0
 }
 
-svg#rocket-smoke {
-    right: 120px;
-    transform: rotate(-5deg);
-}
+.footer-main>.link>.icon:hover {
+    fill: indigo !important
 }
 
-@media screen and (max-width: 575px) {
-svg#rocket-smoke {
-    display: none;
-    visibility: hidden;
+.footer-main>.extra {
+    color: #aaa;
+    margin-top: 0
 }
+
+.footer-main>.extra>.link {
+    color: #222;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: ease-in-out all .3s;
+    padding-bottom: 1px
+}
+
+.footer-main>.extra>.link:hover {
+    border-color: #aaa
 }

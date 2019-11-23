@@ -120,8 +120,8 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart = dc.pieChart(".pie-chart-raça")
 
   piechart
-    .width(320)
-    .height(200)
+    .width(275)
+    .height(275)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(racaDim)
@@ -138,8 +138,8 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart2 = dc.pieChart(".pie-chart-escmae")
 
   piechart2
-    .width(320)
-    .height(200)
+    .width(275)
+    .height(275)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(escDim)
@@ -156,8 +156,8 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart3 = dc.pieChart(".pie-chart-gestacao")
 
   piechart3
-    .width(320)
-    .height(200)
+    .width(275)
+    .height(275)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(gestDim)
