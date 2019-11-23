@@ -194,12 +194,10 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
       .domain([1,10])
       .range(['white', 'beige', 'Khaki', 'yellow', 'orange', 'tomato', 'OrangeRed', 'red'])
 
-  console.log(obitoMap)
 
   
   d3.json("ceara.json", function(error, ceara) {
           if (error) return console.error(error);
-          // console.log(ceara);
           
           var subunits = topojson.feature(ceara, ceara.objects.Municipios_do_Ceara);
           var projection = d3.geoMercator()
@@ -218,7 +216,6 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
                           .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
                           .enter().append("path")
                           .attr("id", function(d) { 
-                                  // console.log(d)
                                   return d.properties.Name.toUpperCase();
                           })
                           .attr("fill", d => colorScale(obitoMap.get(d.properties.Name.toUpperCase())))
@@ -244,8 +241,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
                       svg.selectAll(".subunit")
                           .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
                           .enter().append("path")
-                          .attr("id", function(d) { 
-                                  // console.log(d)
+                          .attr("id", function(d) {
                                   return d.properties.Name.toUpperCase();
                           })
                           .attr("fill", d => colorScale(taxaMap.get(d.properties.Name.toUpperCase())))
@@ -270,7 +266,6 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
                           .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
                           .enter().append("path")
                           .attr("id", function(d) { 
-                                  // console.log(d)
                                   return d.properties.Name.toUpperCase();
                           })
                           .attr("fill", d => colorScale(obitoMap.get(d.properties.Name.toUpperCase())))
@@ -293,21 +288,4 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
                   })
 
   });
-
-  
-
-  // let taxaMap = d3.map()
-  //             dataset.forEach(function(d) {
-  //               taxaMap.set(d.Município.normalize("NFD").replace(/[\u0300-\u036f]/g, ""), d.TAXA_MORT)
-  //             });
-  
-  // d3.selectAll(".subunit")
-
-    
-  // dataset.forEach(function (d) {
-  //   d3.select("#${d.Município}")
-  //       .attr("fill", d => colorScale(taxaMap.get(d.d.Município.normalize("NFD").replace(/[\u0300-\u036f]/g, ""))))
-  // })            
-
-    // d => colorScale(taxaMap.get(d.Município)
 });
