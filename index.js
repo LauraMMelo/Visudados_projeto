@@ -27,7 +27,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
     .domain([0, 1200])
 
   lineChart
-    .width(800)
+    .width(960)
     .height(400)
     .dimension(yearDim)
     .margins({ top: 50, right: 50, bottom: 40, left: 50 })
@@ -55,7 +55,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let barChart = dc.barChart(".bar-chart-idademae")
 
   barChart
-    .width(800)
+    .width(960)
     .height(400)
     .margins({ top: 50, right: 50, bottom: 40, left: 50 })
     .dimension(idadeDim)
@@ -80,21 +80,25 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
           .y(yScaleSmall)
           .group(taxaAno)
           .render()
+          .yAxisLabel("Nº de óbitos")
         barChart
           .y(zeroToHundredScale)
           .group(taxaIdade)
           .render()
+          .yAxisLabel("Nº de óbitos")
       }
       else {
         lineChart
           .y(yScale)
           .group(obitoAno)
           .render()
+          .yAxisLabel("Taxa de mortalidade")
 
         barChart
           .y(idadeScale)
           .group(obitoIdade)
           .render()
+          .yAxisLabel("Taxa de mortalidade")
       }
     })
 
@@ -109,19 +113,12 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart = dc.pieChart(".pie-chart-raça")
 
   piechart
-    .width(250)
+    .width(320)
     .height(200)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(racaDim)
     .group(obitoRaca)
-  // .legend(dc.legend())
-  // // workaround for #703: not enough data is accessible through .label() to display percentages
-  // .on('pretransition', function(chart) {
-  //     chart.selectAll('text.pie-slice').text(function(d) {
-  //         return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
-  //     })
-  // });
   piechart.render();
 
   // ###########################################################################
@@ -134,19 +131,12 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart2 = dc.pieChart(".pie-chart-escmae")
 
   piechart2
-    .width(250)
+    .width(320)
     .height(200)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(escDim)
     .group(obitoEsc)
-  // .legend(dc.legend())
-  // // workaround for #703: not enough data is accessible through .label() to display percentages
-  // .on('pretransition', function(chart) {
-  //     chart.selectAll('text.pie-slice').text(function(d) {
-  //         return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
-  //     })
-  // });
   piechart2.render();
 
   // ################################################################
@@ -159,20 +149,51 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
   let piechart3 = dc.pieChart(".pie-chart-gestacao")
 
   piechart3
-    .width(250)
+    .width(320)
     .height(200)
     .slicesCap(4)
     .innerRadius(40)
     .dimension(gestDim)
     .group(obitoGest)
-  // .legend(dc.legend())
-  // // workaround for #703: not enough data is accessible through .label() to display percentages
-  // .on('pretransition', function(chart) {
-  //     chart.selectAll('text.pie-slice').text(function(d) {
-  //         return d.data.key + ' ' + dc.utils.printSingleValue((d.endAngle - d.startAngle) / (2*Math.PI) * 100) + '%';
-  //     })
-  // });
   piechart3.render();
+
+  // #############
+  // Mapa do Ceará
+  // #############
+
+  var width = 960,
+      height = 600;
+
+  var svg = d3.select(".map").append("svg")
+      .attr("width", width)
+      .attr("height", height);
+
+  d3.json("ceara.json", function(error, ceara) {
+          if (error) return console.error(error);
+          console.log(ceara);
+          
+          var subunits = topojson.feature(ceara, ceara.objects.Municipios_do_Ceara);
+          var projection = d3.geoMercator()
+                                  .center([-5.335113, -39.449235])
+                                  .scale(4500)
+                                  .translate([width*3.3, height*5.4]);
+
+          var path = d3.geoPath()
+                          .projection(projection);
+
+          svg.append("path")
+          .datum(subunits)
+          .attr("d", path);
+
+          svg.selectAll(".subunit")
+                  .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
+                  .enter().append("path")
+                  .attr("class", function(d) { 
+                          // console.log(d)
+                          return "subunit " + d.properties.Name.toUpperCase();
+                  })
+                  .attr("d", path);
+  });
 
 
 });
