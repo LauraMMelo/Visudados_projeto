@@ -81,36 +81,6 @@ d3.csv('./mortalidade_datavis_sem2013.csv', function (dataset) {
   let zeroToHundredScale = d3.scaleLinear()
     .domain([0, 100])
 
-  d3.selectAll('#myCheckbox')
-    .on('change', function () {
-      if (document.getElementById("myCheckbox").checked === true) {
-        lineChart
-          .y(yScaleSmall)
-          .group(taxaAno)
-          .render()
-          .yAxisLabel("Nº de óbitos")
-        barChart
-          .y(zeroToHundredScale)
-          .group(taxaIdade)
-          .render()
-          .yAxisLabel("Nº de óbitos")
-      }
-      else {
-        lineChart
-          .y(yScale)
-          .group(obitoAno)
-          .render()
-          .yAxisLabel("Taxa de mortalidade")
-
-        barChart
-          .y(idadeScale)
-          .group(obitoIdade)
-          .render()
-          .yAxisLabel("Taxa de mortalidade")
-      }
-    })
-
-
   // ###################################################
   // Gráfico que relaciona a Raça à Quantidade de Óbitos
   // ###################################################
@@ -237,6 +207,17 @@ d3.csv('./mortalidade_datavis_sem2013.csv', function (dataset) {
           d3.selectAll('#myCheckbox')
                   .on('change', function () {
                     if (document.getElementById("myCheckbox").checked === true) {
+                      lineChart
+                          .y(yScaleSmall)
+                          .group(taxaAno)
+                          .render()
+                          .yAxisLabel("Nº de óbitos")
+                        barChart
+                          .y(zeroToHundredScale)
+                          .group(taxaIdade)
+                          .render()
+                          .yAxisLabel("Nº de óbitos");
+
                       svg.selectAll(".subunit")
                           .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
                           .enter().append("path")
@@ -261,6 +242,18 @@ d3.csv('./mortalidade_datavis_sem2013.csv', function (dataset) {
                                 })
                             }
                     else {
+                      lineChart
+                        .y(yScale)
+                        .group(obitoAno)
+                        .render()
+                        .yAxisLabel("Taxa de mortalidade")
+
+                      barChart
+                        .y(idadeScale)
+                        .group(obitoIdade)
+                        .render()
+                        .yAxisLabel("Taxa de mortalidade")
+
                       svg.selectAll(".subunit")
                           .data(topojson.feature(ceara, ceara.objects.Municipios_do_Ceara).features)
                           .enter().append("path")
