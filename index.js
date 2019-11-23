@@ -38,6 +38,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
     .height(400)
     .dimension(yearDim)
     .margins({ top: 50, right: 50, bottom: 40, left: 50 })
+    .clipPadding(40)
     .renderArea(false)
     .yAxisLabel("Nº de óbitos")
     .xAxisLabel("Ano")
@@ -205,8 +206,8 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
           var subunits = topojson.feature(ceara, ceara.objects.Municipios_do_Ceara);
           var projection = d3.geoMercator()
                                   .center([-5.335113, -39.449235])
-                                  .scale(4500)
-                                  .translate([width*3.3, height*5.4]);
+                                  .scale(5750)
+                                  .translate([width*4.075, height*6.8]);
 
           var path = d3.geoPath()
                           .projection(projection);
@@ -253,7 +254,7 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
                             d3.select(this).style("cursor", "pointer")
                                 .attr("stroke-width", 3)
                                 .attr("stroke", "#FFF5B1")
-                                .append("title").text(d => d.properties.Name + ": " + obitoMap.get(d.properties.Name.toUpperCase()))
+                                .append("title").text(d => d.properties.Name + ": " + taxaMap.get(d.properties.Name.toUpperCase()))
                       
                             
                             })
