@@ -1,4 +1,4 @@
-d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
+d3.csv('./mortalidade_datavis_sem2013.csv', function (dataset) {
   //console.log(dataset)
 
   function camelCase(str) { 
@@ -191,13 +191,8 @@ d3.csv('../mortalidade_datavis_sem2013.csv', function (dataset) {
         taxaMap.set(d.Município, d.TAXA_MORT)
       });
 
-  // colorScale = d3.scaleQuantize()
-  //     .domain([1,10])
-  //     .range(['white', 'beige', 'Khaki', 'yellow', 'orange', 'tomato', 'OrangeRed', 'red'])
-
   colorScale = d3.scaleSequential(d3["interpolate" + "OrRd"])
       .domain([1,35])
-  console.log(obitoMap)
 
   
   d3.json("ceara.json", function(error, ceara) {
