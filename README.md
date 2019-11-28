@@ -6,7 +6,7 @@
 1. Primeiro clone o repositório usando `git clone` 
 2. No terminal, navegue à página raiz do projeto
 3. Digite: `python -m http.server`
-4. No browser acesse [localhost](localhost:8000) ou caso use uma porta específica adicione-a ao fim da URL
+4. No browser acesse [localhost:8000](localhost:8000) ou caso use uma porta específica substitua-a ao fim da URL
 
 ### Foi desenvolvido utilizando:
 - HTML
