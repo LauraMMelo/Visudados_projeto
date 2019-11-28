@@ -19,5 +19,5 @@
 
 Desenvolvido por:
 
-- [Rômulo Filho](github.com/romulofff)
+- [Rômulo Filho](http://github.com/romulofff)
 - [Saulo Mendes](http://github.com/saulomm)
