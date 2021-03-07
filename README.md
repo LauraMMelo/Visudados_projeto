@@ -1,4 +1,30 @@
-# Visualização de Dados - Projeto Final
+# [EN] Data Visualizaiton - Final project
+
+## This repo contains the source code for generating interactive visualizations about __Infant moratality rate in the state of Ceará__
+
+### To run a local version:
+1. First clone this repo with `git clone` 
+2. In the terminal, got to the root folder of the project
+3. Type in: `python -m http.server` and press enter
+4. in your browser go to [localhost:8000](localhost:8000)
+
+### Technologies used:
+- HTML
+- CSS
+- JavaScript:
+    - D3.js
+    - DC.js
+    - Crossfilter.js
+
+
+Developed by:
+
+- [Rômulo Filho](http://github.com/romulofff)
+- [Saulo Mendes](http://github.com/saulomm)
+
+
+
+# [PT] Visualização de Dados - Projeto Final
 
 ## Este repositório contém código para geração de visualizações interativas sobre a __Mortalidade Infantil no Ceará__
 
